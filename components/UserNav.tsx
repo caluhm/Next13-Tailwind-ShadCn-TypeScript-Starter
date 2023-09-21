@@ -93,7 +93,7 @@ export function UserNav({
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="relative h-9 w-9 rounded-full">
+          <Button variant="ghost" className="relative h-10 w-10 rounded-full">
             <Avatar className="h-10 w-10">
               <AvatarImage src={user?.image!} alt={user?.email!} />
               <AvatarFallback>
@@ -118,16 +118,22 @@ export function UserNav({
             )}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            <DropdownMenuItem onSelect={() => setIsOpen(true)}>
-              <PersonIcon className="w-4 h-4 mr-2" />
-              Profile
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => signOut()}>
-              <ExitIcon className="w-4 h-4 mr-2" />
-              Log out
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
+
+          <DropdownMenuItem
+            onSelect={() => setIsOpen(true)}
+            className="cursor-pointer"
+          >
+            <PersonIcon className="w-4 h-4 mr-2" />
+            Profile
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={() => signOut()}
+            className="cursor-pointer"
+          >
+            <ExitIcon className="w-4 h-4 mr-2" />
+            Log out
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
