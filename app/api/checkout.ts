@@ -1,7 +1,7 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const priceId = process.env.STRIPE_PRICE_ID;
 
-export default async function handler(req:, res) {
+export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
       // Create Checkout Sessions from body params.
