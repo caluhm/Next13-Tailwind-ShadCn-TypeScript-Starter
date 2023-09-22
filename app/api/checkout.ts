@@ -1,5 +1,4 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const priceId = process.env.STRIPE_PRICE_ID;
 
 export default async function handler(req: any, res: any) {
   if (req.method === "POST") {
@@ -9,7 +8,7 @@ export default async function handler(req: any, res: any) {
         line_items: [
           {
             // TODO: replace this with the `price` of the product you want to sell
-            price: priceId,
+            price: "price_1NtFsqFVRAT9rxdZhGOJUqdI",
             quantity: 1,
           },
         ],
