@@ -49,9 +49,3 @@ const handler = async (req: any, res: any) => {
 };
 
 export default handler;
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
