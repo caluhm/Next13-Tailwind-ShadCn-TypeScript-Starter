@@ -1,7 +1,7 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const priceId = process.env.STRIPE_PRICE_ID;
 
-export default async function handler(req, res) {
+export default async function handler(req: any, res: any) {
   if (req.method === "POST") {
     try {
       // Create Checkout Sessions from body params.
@@ -19,7 +19,7 @@ export default async function handler(req, res) {
         cancel_url: `${req.headers.origin}/?canceled=true`,
       });
       res.redirect(303, session.url);
-    } catch (err) {
+    } catch (err: any) {
       res.status(err.statusCode || 500).json(err.message);
     }
   } else {

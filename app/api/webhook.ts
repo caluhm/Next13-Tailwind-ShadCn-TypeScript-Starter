@@ -5,12 +5,12 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const stripe = new Stripe(String(process.env.STRIPE_SECRET_KEY), {
-  apiVersion: "2020-08-27",
+  apiVersion: "2023-08-16",
 });
 
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+const webhookSecret = String(process.env.STRIPE_WEBHOOK_SECRET);
 
-const handler = async (req, res) => {
+const handler = async (req: any, res: any) => {
   if (req.method === "POST") {
     const buf = await buffer(req);
     const sig = req.headers["stripe-signature"];
@@ -25,20 +25,20 @@ const handler = async (req, res) => {
         // Handle successful charge
         await prisma.user.upsert({
           create: {
-            email: charge.billing_details.email,
+            email: (charge as any).billing_details.email,
           },
           update: {
-            email: charge.billing_details.email,
+            email: (charge as any).billing_details.email,
           },
           where: {
-            email: charge.billing_details.email,
+            email: (charge as any).billing_details.email,
           },
         });
         res.status(200).send(`This works!`);
       } else {
         console.warn(`Unhandled event type: ${event.type}`);
       }
-    } catch (err) {
+    } catch (err: any) {
       res.status(400).send(`Webhook Error: ${err.message}`);
       return;
     }
