@@ -4,7 +4,7 @@ const stripe = new Stripe(String(process.env.STRIPE_SECRET_KEY), {
   apiVersion: "2023-08-16",
 });
 
-export default async function handler(req: any, res: any) {
+export default async function POST(req: any, res: any) {
   if (req.method === "POST") {
     try {
       // Create Checkout Sessions from body params.

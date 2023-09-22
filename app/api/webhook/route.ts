@@ -10,7 +10,7 @@ const stripe = new Stripe(String(process.env.STRIPE_SECRET_KEY), {
 
 const webhookSecret = String(process.env.STRIPE_WEBHOOK_SECRET);
 
-const handler = async (req: any, res: any) => {
+export default async function POST(req: any, res: any) {
   if (req.method === "POST") {
     const buf = await buffer(req);
     const sig = req.headers["stripe-signature"];
@@ -46,6 +46,4 @@ const handler = async (req: any, res: any) => {
     res.setHeader("Allow", "POST");
     res.status(405).end("Method Not Allowed");
   }
-};
-
-export default handler;
+}
