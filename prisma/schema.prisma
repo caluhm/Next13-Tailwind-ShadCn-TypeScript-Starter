@@ -44,9 +44,12 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
+  username      String?   @unique
   email         String?   @unique
   emailVerified DateTime? @map("email_verified")
   image         String?
+  stripeCustomerId String?   @unique
+  hasPurchased         Boolean   @default(false)
   accounts      Account[]
   sessions      Session[]
 

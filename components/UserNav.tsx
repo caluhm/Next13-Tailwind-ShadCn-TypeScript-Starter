@@ -44,32 +44,38 @@ import { useSession } from "next-auth/react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 export function UserNav({
   user,
 }: {
   user: {
     name?: string | null | undefined;
+    username?: string | null | undefined;
     email?: string | null | undefined;
     image?: string | null | undefined;
   };
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const { data: session, update } = useSession();
+  const { data: session, status, update } = useSession();
+
+  console.log(user);
+
   const formSchema = z.object({
-    name: z
+    email: z.string().email(),
+    username: z
       .string()
-      .min(3)
+      .min(5)
       .max(25)
       .refine((s) => !s.includes(" "), "No Spaces Allowed!"),
-    email: z.string().email(),
+    name: z.string().includes(" ").min(5).max(25),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: user?.email ?? "",
+      username: user?.username ?? "",
       name: user?.name ?? "",
     },
   });
@@ -78,14 +84,12 @@ export function UserNav({
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
 
-    const { name, email } = values;
+    const { email, username, name } = values;
 
-    if (!name) {
-      return;
-    }
+    if (!username || !name) return;
 
-    await updateProfile(email, name);
-    await update({ name });
+    await updateProfile(email, username, name);
+    await update({ ...session, user: { ...session?.user, username, name } });
 
     setIsOpen(false);
   }
@@ -104,13 +108,13 @@ export function UserNav({
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="end" forceMount>
           <DropdownMenuLabel className="font-normal">
-            {!user?.name ? (
+            {!user?.username ? (
               <p className="text-xs leading-none text-muted-foreground">
                 {user?.email}
               </p>
             ) : (
               <div className="flex flex-col gap-2">
-                <p className="text-sm leading-none">@{user?.name}</p>
+                <p className="text-sm leading-none">@{user?.username}</p>
                 <p className="text-xs leading-none text-muted-foreground">
                   {user?.email}
                 </p>
@@ -165,13 +169,13 @@ export function UserNav({
               />
               <FormField
                 control={form.control}
-                name="name"
+                name="username"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Enter your name..."
+                        placeholder="Enter your username..."
                         {...field}
                         required={false}
                       />
@@ -183,9 +187,31 @@ export function UserNav({
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Full Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your name..."
+                        {...field}
+                        required={false}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      This is your private full name.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
               <DialogFooter className="pt-4">
-                <Button type="submit">Update</Button>
+                <Button type="submit" disabled={status === "loading"}>
+                  {status === "loading" ? "Loading..." : "Update"}
+                </Button>
                 <Button
                   type="button"
                   variant="secondary"

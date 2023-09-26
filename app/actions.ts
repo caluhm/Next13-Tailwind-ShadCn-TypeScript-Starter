@@ -2,7 +2,11 @@
 
 import { PrismaClient } from "@prisma/client";
 
-export async function updateProfile(email: string, name: string) {
+export async function updateProfile(
+  email: string,
+  username: string,
+  name: string,
+) {
   const prisma = new PrismaClient();
 
   const user = await prisma.user.update({
@@ -11,6 +15,7 @@ export async function updateProfile(email: string, name: string) {
     },
     data: {
       name: name,
+      username: username,
     },
   });
 }

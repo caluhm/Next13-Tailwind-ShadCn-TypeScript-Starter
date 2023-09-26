@@ -1,12 +1,13 @@
+"use client"
+
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
 import { UserNav } from "./UserNav";
+import { useSession } from "next-auth/react";
 
-export default async function Header() {
-  const session = await getServerSession(authOptions);
+export default function Header() {
+  const { data: session } = useSession();
 
   return (
     <nav className="flex flex-row justify-center items-center gap-2.5 absolute right-0 top-0 mr-2.5 mt-2.5">

@@ -26,7 +26,38 @@ export const authOptions = {
     error: "/auth/login",
     verifyRequest: "/auth/verify-request",
   },
-};
+  callbacks: {
+    async session({ session, user }) {
+      session!.user!.id = user.id;
+      session!.user!.name = user.name;
+      session!.user!.username = user.username;
+      session!.user!.stripeCustomerId = user.stripeCustomerId;
+      session!.user!.hasPurchased = user.hasPurchased;
+      return session;
+    },
+  },
+  events: {
+    createUser: async ({ user }) => {
+      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+        apiVersion: "2023-08-16",
+      });
+
+      await stripe.customers
+        .create({
+          email: user.email!,
+          name: user.name!,
+        })
+        .then(async (customer) => {
+          return prisma.user.update({
+            where: { id: user.id },
+            data: {
+              stripeCustomerId: customer.id,
+            },
+          });
+        });
+    },
+  },
+} as AuthOptions;
 
 export const handler = NextAuth(authOptions);
 
