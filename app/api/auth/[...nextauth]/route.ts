@@ -1,5 +1,6 @@
 import NextAuth, { AuthOptions } from "next-auth";
 import Email from "next-auth/providers/email";
+import Stripe from "stripe";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 
@@ -25,6 +26,8 @@ export const authOptions = {
     error: "/auth/login",
     verifyRequest: "/auth/verify-request",
   },
-} as AuthOptions;
+};
 
-export default NextAuth(authOptions);
+export const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };

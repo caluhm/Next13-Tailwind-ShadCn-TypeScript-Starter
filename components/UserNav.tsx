@@ -38,7 +38,7 @@ import { ExitIcon, PersonIcon } from "@radix-ui/react-icons";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
 
-import { updateProfile } from "@/app/_actions";
+import { updateProfile } from "@/app/actions";
 
 import { useSession } from "next-auth/react";
 import * as z from "zod";
