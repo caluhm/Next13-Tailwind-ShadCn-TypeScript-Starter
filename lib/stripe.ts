@@ -6,8 +6,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function createCheckoutLink(customer: string) {
   const checkout = await stripe.checkout.sessions.create({
-    success_url: `https://${process.env.VERCEL_URL}?success=true`,
-    cancel_url: `https://${process.env.VERCEL_URL}?success=false`,
+    success_url: `https://${process.env.NEXTAUTH_URL}?success=true`,
+    cancel_url: `https://${process.env.NEXTAUTH_URL}?success=false`,
     customer: customer,
     line_items: [
       {
