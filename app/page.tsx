@@ -7,9 +7,9 @@ import { createCheckoutLink } from "@/lib/stripe";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
-  const checkoutLink = await createCheckoutLink(
+  /*const checkoutLink = await createCheckoutLink(
     String(session?.user?.stripeCustomerId),
-  );
+  );*/
   return (
     <main className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50">
       <section className="flex h-screen flex-col items-center justify-center gap-5">
@@ -23,7 +23,7 @@ export default async function Home() {
             You already purchased this course.
           </p>
         ) : (
-          <Link href={checkoutLink ? checkoutLink : "/"}>
+          <Link href="/">
             <Button type="button" variant="outline" size="lg">
               Purchase course
             </Button>
