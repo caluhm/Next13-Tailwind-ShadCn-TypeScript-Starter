@@ -24,7 +24,8 @@ export const authOptions = {
   pages: {
     signIn: "/auth/login",
     error: "/auth/login",
-    verifyRequest: "/auth/verify-request",
+    verifyRequest:
+      "/auth/login?message=please-check-your-email-for-the-verification-link",
   },
   callbacks: {
     async session({ session, user }) {

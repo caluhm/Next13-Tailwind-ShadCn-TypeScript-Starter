@@ -5,11 +5,16 @@ import Link from "next/link";
 import LoginForm from "./components/LoginForm";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import ErrorMessage from "./components/ErrorMessage";
+import Message from "./components/Message";
 import { useSearchParams } from "next/navigation";
 
 export default function Login() {
   const searchParams = useSearchParams();
   const error = searchParams?.get("error");
+  const message = (
+    searchParams?.get("message")?.split("-").join(" ") || ""
+  ).replace(/^\w/, (c) => c.toUpperCase());
+
 
   return (
     <>
@@ -23,6 +28,7 @@ export default function Login() {
               <h1 className="text-3xl font-semibold">Log In</h1>
             </div>
             {error && <ErrorMessage />}
+            {message && <Message message={message} />}
             <div className="py-8 px-8 h-min border rounded-md">
               <LoginForm />
             </div>

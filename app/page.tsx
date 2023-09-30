@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
+import Link from "next/link";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -14,20 +15,26 @@ export default async function Home() {
           Here you will learn how to build a fullstack app with Next.js, Prisma,
           and Tailwind CSS.
         </p>
-        {session?.user?.hasPurchased ? (
-          <p className="text-xl font-medium">
-            You already purchased this course.
-          </p>
-        ) : (
+        {!session?.user && (
+          <Link href="/api/auth/signin">
+            <Button variant="outline" size="lg">
+              Sign in to purchase
+            </Button>
+          </Link>
+        )}
+        {session?.user && !session?.user?.hasPurchased && (
           <form action="/api/stripe/checkout" method="POST">
-            <Button
-              type="submit"
-              variant="outline"
-              size="lg"
-            >
+            <Button type="submit" variant="outline" size="lg">
               Purchase course
             </Button>
           </form>
+        )}
+        {session?.user && session?.user?.hasPurchased && (
+          <Link href="/course">
+            <Button variant="outline" size="lg">
+              Go to course
+            </Button>
+          </Link>
         )}
       </section>
     </main>

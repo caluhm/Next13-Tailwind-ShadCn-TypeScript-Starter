@@ -6,7 +6,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function createCheckoutLink(customer: string) {
   const checkout = await stripe.checkout.sessions.create({
-    success_url: `${process.env.NEXTAUTH_URL}?success=true`,
+    success_url: `${process.env.NEXTAUTH_URL}/course?success=true`,
     cancel_url: `${process.env.NEXTAUTH_URL}?success=false`,
     customer: customer,
     line_items: [
