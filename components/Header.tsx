@@ -26,9 +26,7 @@ export default function Header() {
           </div>
         </>
       )}
-      <div className="sm:block hidden">
         <ThemeToggle />
-      </div>
     </nav>
   );
 }

@@ -44,6 +44,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useForm } from "react-hook-form";
+import MenuThemeToggle from "./menu-theme-toggle";
 
 export default function UserNav({
   user,
@@ -127,6 +128,8 @@ export default function UserNav({
             <PersonIcon className="w-4 h-4 mr-2" />
             Profile
           </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <MenuThemeToggle />
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onClick={() => signOut()}

@@ -28,7 +28,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui//button";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 import { ExitIcon, PersonIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 
@@ -38,7 +37,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { updateProfile } from "@/app/actions";
-import MobileThemeToggle from "./mobile-theme-toggle";
+import MenuThemeToggle from "./menu-theme-toggle";
 
 export default function MobileUserNav({
   user,
@@ -122,7 +121,7 @@ export default function MobileUserNav({
             Profile
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <MobileThemeToggle />
+          <MenuThemeToggle />
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onClick={() => signOut()}

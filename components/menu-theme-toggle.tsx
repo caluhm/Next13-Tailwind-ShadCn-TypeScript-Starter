@@ -4,7 +4,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MoonIcon, SunIcon, DesktopIcon } from "@radix-ui/react-icons";
 import { Sun } from "lucide-react";
 
-export default function MobileThemeToggle() {
+export default function MenuThemeToggle() {
   const { setTheme } = useTheme();
 
   return (
