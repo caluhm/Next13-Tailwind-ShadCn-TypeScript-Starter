@@ -5,19 +5,31 @@ import { MoonIcon, SunIcon, DesktopIcon } from "@radix-ui/react-icons";
 import { Sun } from "lucide-react";
 
 export default function MenuThemeToggle() {
-  const { setTheme } = useTheme();
+  const { setTheme, theme } = useTheme();
 
   return (
     <DropdownMenuItem className="cursor-default focus:bg-inherit">
-      <Tabs className="w-full">
+      <Tabs defaultValue={theme} className="w-full">
         <TabsList className="w-full justify-between">
-          <TabsTrigger value="light" onClick={() => setTheme("light")}>
+          <TabsTrigger
+            value="light"
+            onClick={() => setTheme("light")}
+            className="py-2"
+          >
             <SunIcon className="w-4 h-4" />
           </TabsTrigger>
-          <TabsTrigger value="dark" onClick={() => setTheme("dark")}>
+          <TabsTrigger
+            value="dark"
+            onClick={() => setTheme("dark")}
+            className="py-2"
+          >
             <MoonIcon className="w-4 h-4" />
           </TabsTrigger>
-          <TabsTrigger value="system" onClick={() => setTheme("system")}>
+          <TabsTrigger
+            value="system"
+            onClick={() => setTheme("system")}
+            className="py-2"
+          >
             <DesktopIcon className="w-4 h-4" />
           </TabsTrigger>
         </TabsList>

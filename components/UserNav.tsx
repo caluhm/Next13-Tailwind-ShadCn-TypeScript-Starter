@@ -120,7 +120,6 @@ export default function UserNav({
             )}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-
           <DropdownMenuItem
             onSelect={() => setIsOpen(true)}
             className="cursor-pointer"
@@ -141,7 +140,7 @@ export default function UserNav({
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <Dialog open={isOpen} onOpenChange={setIsOpen} modal>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Profile</DialogTitle>
@@ -208,7 +207,7 @@ export default function UserNav({
                 )}
               />
 
-              <DialogFooter className="pt-4">
+              <DialogFooter className="pt-4 flex gap-2.5 sm:gap-0 flex-col">
                 <Button type="submit" disabled={status === "loading"}>
                   {status === "loading" ? "Loading..." : "Update"}
                 </Button>
