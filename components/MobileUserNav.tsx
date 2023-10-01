@@ -3,6 +3,7 @@ import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -27,6 +28,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui//button";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 import { ExitIcon, PersonIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 
@@ -36,6 +38,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { updateProfile } from "@/app/actions";
+import MobileThemeToggle from "./mobile-theme-toggle";
 
 export default function MobileUserNav({
   user,
@@ -118,6 +121,8 @@ export default function MobileUserNav({
             <PersonIcon className="w-4 h-4 mr-2" />
             Profile
           </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <MobileThemeToggle />
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onClick={() => signOut()}
