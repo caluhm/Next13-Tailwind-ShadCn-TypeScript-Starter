@@ -3,7 +3,8 @@
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { UserNav } from "./UserNav";
+import UserNav from "./UserNav";
+import MobileUserNav from "./MobileUserNav";
 import { useSession } from "next-auth/react";
 
 export default function Header() {
@@ -16,9 +17,18 @@ export default function Header() {
           <Link href="/auth/login">Login</Link>
         </Button>
       ) : (
-        <UserNav user={session.user} />
+        <>
+          <div className="sm:block hidden">
+            <UserNav user={session.user} />
+          </div>
+          <div className="sm:hidden block">
+            <MobileUserNav user={session.user} />
+          </div>
+        </>
       )}
-      <ThemeToggle />
+      <div className="sm:block hidden">
+        <ThemeToggle />
+      </div>
     </nav>
   );
 }

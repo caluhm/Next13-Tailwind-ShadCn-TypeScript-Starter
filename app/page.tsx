@@ -9,9 +9,11 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50">
-      <section className="flex h-screen flex-col items-center justify-center gap-5">
-        <h1 className="text-7xl font-bold">Welcome to our course.</h1>
-        <p className="text-xl font-medium">
+      <section className="flex h-screen flex-col items-center justify-center gap-5 text-center">
+        <h1 className="lg:text-7xl md:text-5xl sm:text-3xl text-2xl font-bold">
+          Welcome to our course.
+        </h1>
+        <p className="text-base sm:text-lg md:text-xl font-medium">
           Here you will learn how to build a fullstack app with Next.js, Prisma,
           and Tailwind CSS.
         </p>

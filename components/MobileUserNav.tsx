@@ -1,7 +1,5 @@
-"use client";
+import { useState } from "react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui//button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,7 +8,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
+import { Dialog } from "@radix-ui/react-dialog";
+import {
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -21,31 +26,18 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui//button";
 
-import { Dialog } from "@radix-ui/react-dialog";
+import { ExitIcon, PersonIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 
-import {
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { signOut, useSession } from "next-auth/react";
 
-import { ExitIcon, PersonIcon } from "@radix-ui/react-icons";
-
-import { signOut } from "next-auth/react";
-import { useState } from "react";
-
-import { updateProfile } from "@/app/actions";
-
-import { useSession } from "next-auth/react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { useForm } from "react-hook-form";
+import { updateProfile } from "@/app/actions";
 
-export default function UserNav({
+export default function MobileUserNav({
   user,
 }: {
   user: {
@@ -86,21 +78,20 @@ export default function UserNav({
     if (!username || !name) return;
 
     await updateProfile(email, username, name);
-    await update({ ...session, user: { ...session?.user, username, name } });
+    await update({
+      ...session,
+      user: { ...session?.user, username, name },
+    });
 
     setIsOpen(false);
   }
+
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-            <Avatar className="h-10 w-10">
-              <AvatarImage src={user?.image!} alt={user?.email!} />
-              <AvatarFallback>
-                {user?.email?.charAt(0)?.toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
+          <Button variant="link" type="button" size="icon">
+            <HamburgerMenuIcon className="w-7 h-7" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="end" forceMount>
@@ -205,7 +196,7 @@ export default function UserNav({
                 )}
               />
 
-              <DialogFooter className="pt-4">
+              <DialogFooter className="pt-4 flex gap-2.5 sm:gap-0 flex-col">
                 <Button type="submit" disabled={status === "loading"}>
                   {status === "loading" ? "Loading..." : "Update"}
                 </Button>
