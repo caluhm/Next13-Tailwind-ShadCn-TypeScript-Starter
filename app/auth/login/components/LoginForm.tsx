@@ -53,7 +53,7 @@ export default function LoginForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="name@example" {...field} />
+                <Input type="email" placeholder="name@example" {...field} />
               </FormControl>
               <FormDescription>This is your email address.</FormDescription>
               <FormMessage />
