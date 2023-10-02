@@ -29,7 +29,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui//button";
 
-import { ExitIcon, PersonIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
+import {
+  ExitIcon,
+  PersonIcon,
+  HamburgerMenuIcon,
+  Cross1Icon,
+} from "@radix-ui/react-icons";
 
 import { signOut, useSession } from "next-auth/react";
 
@@ -50,6 +55,7 @@ export default function MobileUserNav({
   };
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { data: session, status, update } = useSession();
 
   const formSchema = z.object({
@@ -90,10 +96,14 @@ export default function MobileUserNav({
 
   return (
     <>
-      <DropdownMenu>
+      <DropdownMenu onOpenChange={() => setIsDropdownOpen(!isDropdownOpen)}>
         <DropdownMenuTrigger asChild>
           <Button variant="link" type="button" size="icon">
-            <HamburgerMenuIcon className="w-7 h-7" />
+            {isDropdownOpen ? (
+              <Cross1Icon className="w-5 h-5" />
+            ) : (
+              <HamburgerMenuIcon className="w-6 h-6" />
+            )}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="end" forceMount>

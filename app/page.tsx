@@ -9,7 +9,7 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50">
-      <section className="flex h-screen flex-col items-center justify-center gap-5 text-center">
+      <section className="flex h-screen flex-col items-center justify-center gap-5 text-center px-4">
         <h1 className="lg:text-7xl md:text-5xl sm:text-3xl text-2xl font-bold">
           Welcome to our course.
         </h1>

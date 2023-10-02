@@ -19,7 +19,7 @@ export default function Login() {
   return (
     <>
       <main className="h-screen w-full flex items-center justify-center">
-        <div className="w-96 ">
+        <div className="w-96 px-4">
           <div className="flex w-full h-full flex-col gap-4">
             <div className="flex flew-row gap-3 justify-start items-center">
               <Link href="/">
