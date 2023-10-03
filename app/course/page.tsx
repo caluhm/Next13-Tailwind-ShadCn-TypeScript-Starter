@@ -1,17 +1,17 @@
 import { hasPurchased } from "@/lib/haspurchased";
+import LessonSelect from "./components/LessonSelect";
+import Stats from "./components/Stats";
+import Filler from "./components/Filler";
 
 export default async function Course() {
   await hasPurchased();
 
   return (
-    <main className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50">
-      <section className="flex h-screen flex-col items-center justify-center gap-5 text-center px-4">
-        <h1 className="lg:text-7xl md:text-5xl sm:text-3xl text-2xl font-bold">
-          Thanks for purchasing our course!
-        </h1>
-        <p className="text-base sm:text-lg md:text-xl font-medium">
-          You now have access to all the course content.
-        </p>
+    <main className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50 pt-20">
+      <section className="max-w-screen-xl mx-auto lg:grid lg:grid-cols-[auto_1fr_1fr] gap-6 w-full px-6 lg:h-[calc(100dvh-5rem)] lg:overflow-hidden relative">
+        <Filler />
+        <Stats />
+        <LessonSelect />
       </section>
     </main>
   );
