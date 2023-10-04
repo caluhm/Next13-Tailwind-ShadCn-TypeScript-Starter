@@ -56,48 +56,6 @@ model User {
   @@map("users")
 }
 
-model Chapter {
-  id          Int   @id @default(autoincrement())
-  title       String
-  lessons     Lesson[]
-
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-model Lesson {
-  id          Int   @id @default(autoincrement())
-  title       String
-  category    String
-  videoUrl    String
-
-  chapterId   Int
-  chapter     Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
-  
-  userProgress UserProgress[]
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@index([chapterId])
-}
-
-model UserProgress {
-  id String @id @default(uuid())
-  userId String
-
-  lessonId Int
-  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
-
-  isCompleted Boolean @default(false)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([lessonId])
-  @@unique([userId, lessonId])
-}
-
 model VerificationToken {
   identifier String
   token      String   @unique
