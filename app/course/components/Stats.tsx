@@ -4,16 +4,18 @@ import { Progress } from "@/components/ui/progress";
 export default function Stats() {
   return (
     <div className="w-full flex flex-col gap-8 mt-6 px-2">
-      <div className="border rounded-lg p-6 text-center">
+      <div className="border border-foreground rounded-lg px-6 py-12 text-center">
         <h1 className="text-4xl font-bold">Course Title</h1>
       </div>
-      <div className="bg-foreground rounded-lg flex flex-row w-full justify-between p-4 items-center">
-        <div className="text-background">
-          <p className="text-sm font-medium">Current Lesson</p>
-          <p className="text-xl font-semibold">Lesson 1</p>
+      <div className="bg-muted rounded-lg flex flex-row w-full justify-between p-4 items-center">
+        <div>
+          <p className="text-sm font-medium text-muted-foreground">
+            Current Lesson
+          </p>
+          <p className="text-xl font-bold text-foreground">Lesson 1</p>
         </div>
         <div>
-          <Button variant="outline">Resume</Button>
+          <Button variant="default">Resume</Button>
         </div>
       </div>
       <div className="flex flex-col w-full gap-2">

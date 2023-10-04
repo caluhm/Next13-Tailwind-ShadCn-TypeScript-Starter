@@ -32,8 +32,8 @@ export const authOptions = {
       session!.user!.id = user.id;
       session!.user!.name = user.name;
       session!.user!.username = user.username;
+      session!.user!.role = user.role;
       session!.user!.stripeCustomerId = user.stripeCustomerId;
-      session!.user!.hasPurchased = user.hasPurchased;
       return session;
     },
   },

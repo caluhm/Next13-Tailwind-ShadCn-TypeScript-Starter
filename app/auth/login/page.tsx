@@ -15,7 +15,6 @@ export default function Login() {
     searchParams?.get("message")?.split("-").join(" ") || ""
   ).replace(/^\w/, (c) => c.toUpperCase());
 
-
   return (
     <>
       <main className="h-screen w-full flex items-center justify-center">
@@ -27,7 +26,7 @@ export default function Login() {
               </Link>
               <h1 className="text-3xl font-semibold">Log In</h1>
             </div>
-            {error && <ErrorMessage />}
+            {error && <ErrorMessage message={error} />}
             {message && <Message message={message} />}
             <div className="py-8 px-8 h-min border rounded-md">
               <LoginForm />

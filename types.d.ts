@@ -5,13 +5,13 @@ declare module "next-auth" {
     user?: DefaultUser & {
       id: string;
       username: string;
+      role: string;
       stripeCustomerId: string;
-      hasPurchased: boolean;
     };
   }
   interface User extends DefaultUser {
     username: string;
+    role: string;
     stripeCustomerId: string;
-    hasPurchased: boolean;
   }
 }

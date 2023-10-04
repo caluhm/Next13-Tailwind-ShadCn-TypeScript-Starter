@@ -50,7 +50,7 @@ const webhookHandler = async (req: NextRequest) => {
           },
           // Update that customer so their status is now active
           data: {
-            hasPurchased: true,
+            role: "customer",
           },
         });
         break;
@@ -62,7 +62,7 @@ const webhookHandler = async (req: NextRequest) => {
           },
           // Update that customer so their status is now active
           data: {
-            hasPurchased: false,
+            role: "user",
           },
         });
         break;
