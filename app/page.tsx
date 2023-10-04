@@ -24,7 +24,7 @@ export default async function Home() {
             </Button>
           </Link>
         )}
-        {session?.user?.role === "user" ? (
+        {session?.user && session?.user?.role === "user" ? (
           <form action="/api/stripe/checkout" method="POST">
             <Button type="submit" variant="outline" size="lg">
               Purchase course

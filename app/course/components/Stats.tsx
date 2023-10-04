@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import Link from "next/link";
 
 export default function Stats() {
   return (
@@ -12,19 +13,19 @@ export default function Stats() {
           <p className="text-sm font-medium text-muted-foreground">
             Current Lesson
           </p>
-          <p className="text-xl font-bold text-foreground">Lesson 1</p>
+          <p className="text-xl font-bold text-foreground">Lesson 7</p>
         </div>
-        <div>
+        <Link href="/course/lessons/html/7">
           <Button variant="default">Resume</Button>
-        </div>
+        </Link>
       </div>
       <div className="flex flex-col w-full gap-2">
         <p className="text-sm font-medium">Course Progress</p>
         <div className="flex flex-row w-full justify-between items-center">
           <div className="w-[75%]">
-            <Progress value={75} />
+            <Progress value={33} />
           </div>
-          <span className="text-sm font-medium">75% complete</span>
+          <span className="text-sm font-medium">33% complete</span>
         </div>
       </div>
       <div className="w-full flex flex-row justify-center items-center gap-4 border rounded-lg p-6">
