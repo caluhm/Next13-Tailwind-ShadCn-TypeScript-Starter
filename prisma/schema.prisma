@@ -3,12 +3,76 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
   relationMode = "prisma"
+}
+
+model Course {
+  id String @id @default(uuid())
+  title String @unique
+  description String @db.Text
+
+  chapters Chapter[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@fulltext([title])
+}
+
+model Chapter {
+  id String @id @default(uuid())
+  title String @db.Text
+  description String @db.Text
+
+  courseId String
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  lessons Lesson[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([courseId])
+}
+
+model Lesson {
+  id String @id @default(uuid())
+  title String @db.Text
+  link String @db.Text
+
+  chapterId String
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  userProgress UserProgress[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([chapterId])
+}
+
+model UserProgress {
+  id String @id @default(uuid())
+
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  lessonId String
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  isCompleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([lessonId])
+  @@unique([userId, lessonId])
 }
 
 model Account {
@@ -50,6 +114,7 @@ model User {
   image         String?
   role          String    @default("user")
   stripeCustomerId String?   @unique
+  userProgress  UserProgress[]
   accounts      Account[]
   sessions      Session[]
 

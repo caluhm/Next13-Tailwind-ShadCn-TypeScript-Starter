@@ -9,3 +9,11 @@ export async function canViewCourse() {
     redirect("/");
   }
 }
+
+export async function canEditCourse() {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user || session?.user?.role !== "admin") {
+    redirect("/");
+  }
+}
