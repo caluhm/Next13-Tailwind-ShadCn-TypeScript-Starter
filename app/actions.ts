@@ -222,3 +222,43 @@ export async function fetchFirstCourse() {
 
   return course;
 }
+
+export async function fetchCompletionStatus(lessonId: string, userId: string) {
+  const completion = await prisma.userProgress.findUnique({
+    where: {
+      userId_lessonId: {
+        lessonId: lessonId,
+        userId: userId,
+      },
+    },
+  });
+
+  return completion?.isCompleted;
+}
+
+export async function setCompletionStatus(
+  lessonId: string,
+  userId: string,
+  chapter: string,
+) {
+  const completion = await prisma.userProgress.upsert({
+    where: {
+      userId_lessonId: {
+        lessonId: lessonId,
+        userId: userId,
+      },
+    },
+    update: {
+      isCompleted: true,
+    },
+    create: {
+      userId: userId,
+      lessonId: lessonId,
+      isCompleted: true,
+    },
+  });
+
+  revalidatePath(`/course/lessons/${chapter}/${lessonId}`);
+
+  return completion;
+}
