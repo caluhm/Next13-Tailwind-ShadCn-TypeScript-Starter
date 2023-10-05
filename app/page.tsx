@@ -27,14 +27,14 @@ export default async function Home() {
         {session?.user?.role === "user" && (
           <form action="/api/stripe/checkout" method="POST">
             <Button type="submit" variant="outline" size="lg">
-              Purchase course
+              Purchase course access
             </Button>
           </form>
         )}
-        {session?.user?.role === "customer" && (
+        {session?.user?.role === "customer" || "admin" && (
           <Link href="/course">
             <Button variant="outline" size="lg">
-              Go to course
+              Go to courses
             </Button>
           </Link>
         )}

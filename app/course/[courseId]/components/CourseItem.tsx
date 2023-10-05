@@ -10,8 +10,8 @@ export default function CourseItem({
   return (
     <div className="flex flex-row gap-2 items-center rounded-lg">
       <div
-        className={`rounded-lg border border-muted-foreground ${
-          selected ? "bg-indigo-500/50" : "bg-foreground/10"
+        className={`rounded-lg border-2 bg-foreground/10 ${
+          selected ? "border-indigo-500/50" : "border-muted-foreground"
         } 
         w-10 h-10 flex justify-center items-center`}
       >

@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 export async function canViewCourse() {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user || session?.user?.role !== "customer") {
+  if (!session?.user || session?.user?.role === "user") {
     redirect("/");
   }
 }
