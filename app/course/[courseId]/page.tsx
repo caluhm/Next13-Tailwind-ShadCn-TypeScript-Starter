@@ -13,11 +13,11 @@ export default async function Course({
   await canViewCourse();
 
   const course = await fetchCourseById(params.courseId);
-  !course && redirect("/course")
+  !course && redirect("/course");
   const chapters = await fetchChaptersByCourseId(course?.id!);
 
   return (
-    <main className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50 lg:pt-20">
+    <main className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50 pt-20">
       <section className="max-w-screen-xl mx-auto lg:grid lg:grid-cols-[auto_1fr_1fr] gap-6 w-full px-6 lg:h-[calc(100dvh-5rem)] lg:overflow-hidden relative lg:py-0 py-12">
         <CourseSelect selectedId={course?.id} />
         <Stats
