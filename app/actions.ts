@@ -145,6 +145,16 @@ export async function fetchChapterById(id: string) {
   return chapter;
 }
 
+export async function fetchLessonById(id: string) {
+  const lesson = await prisma.lesson.findUniqueOrThrow({
+    where: {
+      id: id,
+    },
+  });
+
+  return lesson;
+}
+
 export async function fetchChaptersByCourseId(id: string) {
   const chapters = await prisma.chapter.findMany({
     where: {
@@ -188,7 +198,32 @@ export async function deleteLesson(
     },
   });
 
+  revalidatePath(`/admin/course/${courseId}/chapter/${chapterId}`);
   redirect(`/admin/course/${courseId}/chapter/${chapterId}`);
+
+  return lesson;
+}
+
+export async function updateLesson(
+  courseId: string,
+  chapterId: string,
+  lessonId: string,
+  title: string,
+  link: string,
+) {
+  const lesson = await prisma.lesson.update({
+    where: {
+      id: lessonId,
+    },
+    data: {
+      title: title,
+      link: link,
+    },
+  });
+
+  revalidatePath(
+    `/admin/course/${courseId}/chapter/${chapterId}/lesson/${lessonId}`,
+  );
 
   return lesson;
 }
@@ -197,16 +232,6 @@ export async function fetchLessonsByChapterId(id: string) {
   const lesson = await prisma.lesson.findMany({
     where: {
       chapterId: id,
-    },
-  });
-
-  return lesson;
-}
-
-export async function fetchLessonById(id: string) {
-  const lesson = await prisma.lesson.findUnique({
-    where: {
-      id: id,
     },
   });
 

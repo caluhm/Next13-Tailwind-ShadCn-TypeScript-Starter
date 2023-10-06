@@ -3,6 +3,7 @@ import { canViewCourse } from "@/lib/isauthorised";
 import Stats from "./components/Stats";
 import CourseSelect from "./components/CourseSelect";
 import LessonSelect from "./components/LessonSelect";
+import { redirect } from "next/navigation";
 
 export default async function Course({
   params,
@@ -12,6 +13,7 @@ export default async function Course({
   await canViewCourse();
 
   const course = await fetchCourseById(params.courseId);
+  !course && redirect("/course")
   const chapters = await fetchChaptersByCourseId(course?.id!);
 
   return (

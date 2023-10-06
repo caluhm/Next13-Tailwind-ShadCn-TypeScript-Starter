@@ -60,17 +60,13 @@ export default async function AdminCourseChapterPage({
                       </div>
                     </div>
                     <div className="flex flex-row gap-4">
-                      {/*
                       <Link
-                        href={`/admin/course/${course?.id}/chapter/${chapter?.id}/lesson/${lesson.id}}`}
+                        href={`/admin/course/${course?.id}/chapter/${chapter?.id}/lesson/${lesson.id}`}
                       >
-                      */}
-                      <Button variant="default" size="sm">
-                        View Details
-                      </Button>
-                      {/*
+                        <Button variant="default" size="sm">
+                          View Details
+                        </Button>
                       </Link>
-                      */}
                       <DeleteLesson
                         courseId={course?.id!}
                         chapterId={chapter?.id!}
