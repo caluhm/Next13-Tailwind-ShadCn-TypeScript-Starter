@@ -20,8 +20,8 @@ export default async function AdminCourseChapterLessonPage({
   return (
     <main className="min-h-screen flex flex-col items-center bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50 pt-20">
       <div className="w-full flex flex-col gap-8 xl:px-24 lg:px-12 md:px-6 px-4">
-        <div className="w-full flex justify-between">
-          <h1 className="text-2xl font-semibold">
+        <div className="w-full flex lg:flex-row flex-col lg:justify-between justify-center lg:gap-0 gap-2.5">
+          <h1 className="lg:text-2xl text-lg font-semibold">
             Course: {course?.title}, Chapter: {chapter?.title}, Lesson:{" "}
             {lesson?.title}
           </h1>

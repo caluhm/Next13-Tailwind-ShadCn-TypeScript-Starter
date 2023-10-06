@@ -19,7 +19,7 @@ export default async function LessonPage({
   );
   return (
     <main className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50 flex justify-center items-center">
-      <div className="w-5/6 aspect-video rounded-md overflow-hidden p-24">
+      <div className="lg:w-4/6 w-11/12 aspect-video rounded-md overflow-hidden">
         <CompletionButton
           isCompleted={isCompleted ?? false}
           lessonId={lesson?.id!}
