@@ -14,6 +14,7 @@ export default async function CourseSelect({
         {courses?.map((course) => (
           <CourseItem
             key={course.id}
+            id={course.id}
             title={course.title}
             selected={course.id === selectedId}
           />

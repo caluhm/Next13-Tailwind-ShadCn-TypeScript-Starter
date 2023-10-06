@@ -19,8 +19,8 @@ export default async function Course({
       <section className="max-w-screen-xl mx-auto lg:grid lg:grid-cols-[auto_1fr_1fr] gap-6 w-full px-6 lg:h-[calc(100dvh-5rem)] lg:overflow-hidden relative">
         <CourseSelect selectedId={course?.id} />
         <Stats
-          courseId={course?.id}
-          title={course?.title}
+          courseId={course?.id!}
+          title={course?.title!}
           description={course?.description}
         />
         <LessonSelect chapters={chapters} />

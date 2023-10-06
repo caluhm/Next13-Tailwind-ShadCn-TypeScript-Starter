@@ -17,7 +17,6 @@ export default async function LessonPage({
     lesson?.id!,
     session?.user?.id!,
   );
-  console.log(lesson?.link);
   return (
     <main className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50 flex justify-center items-center">
       <div className="w-5/6 aspect-video rounded-md overflow-hidden p-24">

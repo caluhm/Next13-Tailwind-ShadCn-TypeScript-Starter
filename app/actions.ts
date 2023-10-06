@@ -262,3 +262,61 @@ export async function setCompletionStatus(
 
   return completion;
 }
+
+export async function countTotalLessonsByChapterId(chapterId: string) {
+  const count = await prisma.lesson.count({
+    where: {
+      chapterId: chapterId,
+    },
+  });
+
+  return count;
+}
+
+export async function countTotalLessonsCompletedByChapterId(
+  chapterId: string,
+  userId: string,
+) {
+  const count = await prisma.userProgress.count({
+    where: {
+      lesson: {
+        chapterId: chapterId,
+      },
+      userId: userId,
+      isCompleted: true,
+    },
+  });
+
+  return count;
+}
+
+export async function countTotalLessonsByCourseId(courseId: string) {
+  const count = await prisma.lesson.count({
+    where: {
+      chapter: {
+        courseId: courseId,
+      },
+    },
+  });
+
+  return count;
+}
+
+export async function countTotalLessonsCompletedByCourseId(
+  courseId: string,
+  userId: string,
+) {
+  const count = await prisma.userProgress.count({
+    where: {
+      lesson: {
+        chapter: {
+          courseId: courseId,
+        },
+      },
+      userId: userId,
+      isCompleted: true,
+    },
+  });
+
+  return count;
+}
