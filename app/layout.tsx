@@ -12,9 +12,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "NextJS 13 + TailwindCSS + Shadcn/ui + TypeScript Starter",
+  title: "Course Platform",
   description:
-    "A starter template for NextJS 13 + TailwindCSS + Shadcn/ui + TypeScript",
+    "A course for NextJS 13 + TailwindCSS + Shadcn/ui + TypeScript",
 };
 
 export default function RootLayout({

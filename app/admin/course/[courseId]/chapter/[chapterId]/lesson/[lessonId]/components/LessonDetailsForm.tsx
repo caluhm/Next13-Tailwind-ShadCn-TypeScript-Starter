@@ -9,6 +9,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui//button";
 
@@ -16,7 +23,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { updateChapter, updateLesson } from "@/app/actions";
+import { updateLesson } from "@/app/actions";
 
 export default function LessonDetailsForm({
   courseId,
@@ -24,16 +31,19 @@ export default function LessonDetailsForm({
   lessonId,
   title,
   link,
+  format,
 }: {
   courseId: string;
   chapterId: string;
   lessonId: string;
   title: string;
   link: string;
+  format: string;
 }) {
   const formSchema = z.object({
     title: z.string().min(3, "Title must be at least 3 characters long."),
     link: z.string().url("Please enter a valid URL."),
+    format: z.string().nonempty("Please select a format."),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -41,6 +51,7 @@ export default function LessonDetailsForm({
     defaultValues: {
       title: title ?? "",
       link: link ?? "",
+      format: format ?? "",
     },
   });
 
@@ -51,7 +62,10 @@ export default function LessonDetailsForm({
     if (
       !values.title ||
       !values.link ||
-      (values.link === link && values.title === title)
+      !values.format ||
+      (values.link === link &&
+        values.title === title &&
+        values.format === format)
     )
       return;
 
@@ -61,6 +75,7 @@ export default function LessonDetailsForm({
       lessonId,
       values.title,
       values.link,
+      values.format,
     );
   }
   return (
@@ -77,6 +92,31 @@ export default function LessonDetailsForm({
               </FormControl>
               <FormDescription>
                 This is the title of your lesson.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="format"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Format</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a format for the lesson" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="lesson">Lesson</SelectItem>
+                  <SelectItem value="quiz">Quiz</SelectItem>
+                  <SelectItem value="challenge">Challenge</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormDescription>
+                This is the format of the lesson.
               </FormDescription>
               <FormMessage />
             </FormItem>

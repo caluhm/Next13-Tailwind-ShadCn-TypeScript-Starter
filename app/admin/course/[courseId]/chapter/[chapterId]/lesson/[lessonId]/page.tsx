@@ -44,6 +44,7 @@ export default async function AdminCourseChapterLessonPage({
                 lessonId={lesson?.id!}
                 title={lesson?.title!}
                 link={lesson?.link!}
+                format={lesson?.format!}
               />
             </div>
           </div>

@@ -45,6 +45,7 @@ model Lesson {
   id String @id @default(uuid())
   title String @db.Text
   link String @db.Text
+  format String @db.Text
 
   chapterId String
   chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)

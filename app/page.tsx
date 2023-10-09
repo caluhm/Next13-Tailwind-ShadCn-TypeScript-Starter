@@ -24,20 +24,22 @@ export default async function Home() {
             </Button>
           </Link>
         )}
-        {session?.user && (session?.user?.role === "user") && (
+        {session?.user && session?.user?.role === "user" && (
           <form action="/api/stripe/checkout" method="POST">
             <Button type="submit" variant="outline" size="lg">
               Purchase course access
             </Button>
           </form>
         )}
-        {session?.user && (session?.user?.role === "customer" || "admin") && (
+        {session?.user &&
+          (session?.user?.role === "customer" ||
+            session?.user?.role === "admin") && (
             <Link href="/course">
               <Button variant="outline" size="lg">
                 Go to courses
               </Button>
             </Link>
-        )}
+          )}
       </section>
     </main>
   );

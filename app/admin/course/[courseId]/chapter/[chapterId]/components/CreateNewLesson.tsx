@@ -19,6 +19,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui//button";
 
@@ -38,7 +45,8 @@ export default function CreateNewLesson({
 
   const formSchema = z.object({
     title: z.string().min(3, "Title must be at least 3 characters long."),
-    link: z.string().url("Link must be a valid URL."),
+    link: z.string().url("Please enter a valid URL."),
+    format: z.string().nonempty("Please select a format."),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -46,6 +54,7 @@ export default function CreateNewLesson({
     defaultValues: {
       title: "",
       link: "",
+      format: "",
     },
   });
 
@@ -53,9 +62,9 @@ export default function CreateNewLesson({
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
 
-    const { title, link } = values;
+    const { title, link, format } = values;
 
-    await createLesson(courseId, chapterId, title, link);
+    await createLesson(courseId, chapterId, title, link, format);
 
     setIsOpen(false);
   }
@@ -92,6 +101,40 @@ export default function CreateNewLesson({
                     </FormControl>
                     <FormDescription>
                       This is the title of your lesson.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="format"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Format</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a format for the lesson" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="lesson">
+                          Lesson
+                        </SelectItem>
+                        <SelectItem value="quiz">
+                          Quiz
+                        </SelectItem>
+                        <SelectItem value="challenge">
+                          Challenge
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormDescription>
+                      This is the format of the lesson.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

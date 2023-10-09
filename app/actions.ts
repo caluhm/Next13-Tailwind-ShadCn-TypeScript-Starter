@@ -173,12 +173,14 @@ export async function createLesson(
   chapterId: string,
   title: string,
   link: string,
+  format: string,
 ) {
   const lesson = await prisma.lesson.create({
     data: {
       chapterId: chapterId,
       title: title,
       link: link,
+      format: format,
     },
   });
 
@@ -210,6 +212,7 @@ export async function updateLesson(
   lessonId: string,
   title: string,
   link: string,
+  format: string,
 ) {
   const lesson = await prisma.lesson.update({
     where: {
@@ -218,6 +221,7 @@ export async function updateLesson(
     data: {
       title: title,
       link: link,
+      format: format,
     },
   });
 
