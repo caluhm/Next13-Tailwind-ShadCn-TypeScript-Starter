@@ -237,6 +237,9 @@ export async function fetchLessonsByChapterId(id: string) {
     where: {
       chapterId: id,
     },
+    orderBy: {
+      createdAt: "asc",
+    },
   });
 
   return lesson;

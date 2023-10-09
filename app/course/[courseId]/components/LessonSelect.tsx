@@ -12,7 +12,7 @@ export default function LessonSelect({
   chapters: { id: string; title: string; description: string }[];
 }) {
   return (
-    <aside className="max-h-[750px] overflow-auto px-2 lg:py-0 mt-8">
+    <aside className="max-h-[750px] overflow-auto px-2 mt-8 lg:mt-0">
       <div className="sticky top-0 left-0 w-full h-6 bg-gradient-to-b from-background to-transparent z-10"></div>
       <div className="flex flex-col gap-4">
         {chapters.map((chapter) => (

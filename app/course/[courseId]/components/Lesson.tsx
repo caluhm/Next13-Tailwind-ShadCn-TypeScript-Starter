@@ -9,7 +9,7 @@ export default async function Lesson({
   lesson,
 }: {
   chapterTitle: string;
-  lesson: { id: string; title: string };
+  lesson: { id: string; title: string, format: string };
 }) {
   const session = await getServerSession(authOptions);
   const isComplete = await fetchCompletionStatus(lesson.id, session?.user?.id!);
@@ -23,7 +23,12 @@ export default async function Lesson({
           className="text-xl font-medium rounded border w-full py-2 flex flex-row justify-between px-4 items-center hover:bg-foreground hover:text-background cursor-pointer transition-colors ease-in-out duration-300"
           key={lesson.id}
         >
-          <p className="text-sm font-medium">{lesson.title}</p>
+          <div className="flex flex-row gap-2.5 justify-center items-center">
+            <p className="text-sm font-medium">{lesson.title}</p>
+            <div className="text-xs rounded border px-2 py-1.5">
+              {lesson.format.charAt(0).toUpperCase() + lesson.format.slice(1)}
+            </div>
+          </div>
           {isComplete ? (
             <CheckCircledIcon className="w-7 h-7 text-green-600" />
           ) : (
