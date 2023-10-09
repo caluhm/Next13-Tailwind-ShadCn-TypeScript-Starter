@@ -7,6 +7,7 @@ import {
 import { canViewCourse } from "@/lib/isauthorised";
 import DeleteLessonAndRedirect from "./components/DeleteLessonAndRedirect";
 import LessonDetailsForm from "./components/LessonDetailsForm";
+import BackButton from "@/components/BackButton";
 
 export default async function AdminCourseChapterLessonPage({
   params,
@@ -19,6 +20,7 @@ export default async function AdminCourseChapterLessonPage({
   const lesson = await fetchLessonById(params.lessonId);
   return (
     <main className="min-h-screen flex flex-col items-center bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50 pt-20">
+      <BackButton />
       <div className="w-full flex flex-col gap-8 xl:px-24 lg:px-12 md:px-6 px-4">
         <div className="w-full flex lg:flex-row flex-col lg:justify-between justify-center lg:gap-0 gap-2.5">
           <h1 className="lg:text-2xl text-lg font-semibold">

@@ -4,6 +4,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { canViewCourse } from "@/lib/isauthorised";
 import { getServerSession } from "next-auth";
 import CompletionButton from "./components/CompletionButton";
+import BackButton from "@/components/BackButton";
 
 export default async function LessonPage({
   params,
@@ -19,6 +20,7 @@ export default async function LessonPage({
   );
   return (
     <main className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50 flex justify-center items-center">
+      <BackButton />
       <div className="lg:w-4/6 w-11/12 aspect-video rounded-md overflow-hidden">
         <CompletionButton
           isCompleted={isCompleted ?? false}

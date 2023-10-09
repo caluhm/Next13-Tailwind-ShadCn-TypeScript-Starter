@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import DeleteChapter from "./components/DeleteChapter";
 import { canViewCourse } from "@/lib/isauthorised";
+import BackButton from "@/components/BackButton";
 
 export default async function AdminCoursePage({
   params,
@@ -18,6 +19,7 @@ export default async function AdminCoursePage({
 
   return (
     <main className="min-h-screen flex flex-col items-center bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50 pt-20">
+      <BackButton />
       <div className="w-full flex flex-col gap-8 xl:px-24 lg:px-12 md:px-6 px-4">
         <div className="w-full flex lg:flex-row flex-col lg:justify-between justify-center lg:gap-0 gap-2.5">
           <h1 className="lg:text-2xl text-lg font-semibold">
