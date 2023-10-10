@@ -4,12 +4,19 @@ import { fetchCompletionStatus } from "@/app/actions";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 export default async function Lesson({
   chapterTitle,
   lesson,
 }: {
   chapterTitle: string;
-  lesson: { id: string; title: string, format: string };
+  lesson: { id: string; title: string; format: string };
 }) {
   const session = await getServerSession(authOptions);
   const isComplete = await fetchCompletionStatus(lesson.id, session?.user?.id!);
@@ -29,11 +36,27 @@ export default async function Lesson({
               {lesson.format.charAt(0).toUpperCase() + lesson.format.slice(1)}
             </div>
           </div>
-          {isComplete ? (
-            <CheckCircledIcon className="w-7 h-7 text-green-600" />
-          ) : (
-            <CircleIcon className="w-7 h-7 text-muted" />
-          )}
+          <TooltipProvider>
+            {isComplete ? (
+              <Tooltip>
+                <TooltipTrigger>
+                  <CheckCircledIcon className="w-7 h-7 text-green-600" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Lesson is complete!</p>
+                </TooltipContent>
+              </Tooltip>
+            ) : (
+              <Tooltip>
+                <TooltipTrigger>
+                  <CircleIcon className="w-7 h-7 text-muted" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Lesson is incomplete...</p>
+                </TooltipContent>
+              </Tooltip>
+            )}
+          </TooltipProvider>
         </div>
       </Link>
     </>
