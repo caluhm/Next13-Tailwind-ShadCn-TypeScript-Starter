@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
 
 import { Dialog } from "@radix-ui/react-dialog";
 import {
@@ -30,7 +29,6 @@ import { createCourse } from "@/app/actions";
 
 export default function CreateNewCourse() {
   const [isOpen, setIsOpen] = useState(false);
-  const { pending } = useFormStatus();
 
   const formSchema = z.object({
     title: z.string().min(3, "Title must be at least 3 characters long."),
@@ -112,9 +110,7 @@ export default function CreateNewCourse() {
                 )}
               />
               <DialogFooter className="pt-4 flex gap-2.5 sm:gap-0 flex-col">
-                <Button type="submit" disabled={pending}>
-                  Create
-                </Button>
+                <Button type="submit">Create</Button>
                 <Button
                   type="button"
                   variant="secondary"

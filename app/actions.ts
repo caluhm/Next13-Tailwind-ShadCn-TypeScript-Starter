@@ -120,7 +120,11 @@ export async function deleteChapter(courseId: string, chapterId: string) {
 }
 
 export async function fetchAllCourses() {
-  const courses = await prisma.course.findMany();
+  const courses = await prisma.course.findMany({
+    orderBy: {
+      createdAt: "asc",
+    },
+  });
 
   return courses;
 }
